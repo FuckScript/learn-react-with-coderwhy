@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button class="btn">按钮</button>
+  <script>
+    document.getElementsByClassName("btn")[0].addEventListener("click", (e) => {
+      // 这里拿到的是原生event对象
+      console.log(e);
+    })
+  </script>
+
+  <div id="app"></div>
+
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+  <script type="text/babel">
+    class App extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          movies: ["大话西游", "海王", "流浪地球", "盗梦空间"]
+        }
+
+        this.btnClick = this.btnClick.bind(this);
+      }
+
+      render() {
+        return (
+          <div>
+            <button onClick={this.btnClick}>按钮</button>
+
+            <ul>
+              {/* 需要写jsx代码的地方用{} */}
+              {
+                this.state.movies.map((item, index, arr) => {
+                  {/* 2.方案二: 定义函数时, 使用箭头函数 */ }
+                  {/* return 用()包裹起来，方便阅读和换行 */ }
+                  return (
+                    <li className="item"
+                      onClick={e => { this.liClick(item, index, e) }}
+                      title="li">
+                      {item}
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
+        )
+      }
+
+      btnClick(event) {
+        // 这里拿到的event对象是react返回出来的，和原生的event大致相似但也会有所不同
+        console.log("按钮发生了点击", event);
+      }
+
+      liClick(item, index, event) {
+        console.log("li发生了点击", item, index, event);
+      }
+    }
+
+    ReactDOM.render(<App />, document.getElementById("app"));
+  </script>
+
+</body>
+
+</html>

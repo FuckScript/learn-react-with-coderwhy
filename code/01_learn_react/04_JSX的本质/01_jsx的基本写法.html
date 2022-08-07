@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app"></div>
+
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+
+  <script>
+    // jsx -> babel -> React.createElement()
+    const message1 = <h2>Hello React</h2>;
+
+    /* 
+    实际上，jsx 仅仅只是 React.createElement(component, props, ...children) 函数的语法糖。
+    所有的jsx最终都会被转换成React.createElement的函数调用。
+    转换过程： jsx -> babel -> React.createElement()
+    */
+    // React.createElement(当前节点类型type, 节点上的属性为config对象形式,子节点children数组形式);
+    const message2 = React.createElement("h2", null, "Hello React");
+
+    ReactDOM.render(message1, document.getElementById("app"));
+
+  </script>
+
+</body>
+
+</html>

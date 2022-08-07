@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app"></div>
+
+  <div style="color: red; font-size: 30px;"></div>
+
+  <script src="../react/react.development.js"></script>
+  <script src="../react/react-dom.development.js"></script>
+  <script src="../react/babel.min.js"></script>
+
+  <script type="text/babel">
+    function getSizeImage(imgUrl, size) {
+      return imgUrl + `?param=${size}x${size}`
+    }
+
+    class App extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          title: "标题",
+          imgUrl: "http://p2.music.126.net/L8IDEWMk_6vyT0asSkPgXw==/109951163990535633.jpg",
+          link: "http://www.baidu.com",
+          active: true
+        }
+      }
+
+      render() {
+        const { title, imgUrl, link, active } = this.state;
+        return (
+          <div>
+            {/* 1.绑定普通属性(在vue里是:title=''，在react里是title={}) */}
+            {/* 在react里，{}里的可以是任何的jsx/js代码 */}
+            <h2 title={title}>我是标题</h2>
+            <img src={getSizeImage(imgUrl, 140)} alt="" />
+            <a href={link} target="_blank">百度一下</a>
+
+            {/* 2.绑定class */}
+            {/* 
+              我们现在写的语法是jsx语法，js里的class是关键字，所以在给html
+              加class属性时，就不能再使用class了。所以在react里的添加class，
+              应该使用className
+              又比如在js里for也是关键字，所以<label>标签里的for属性在jsx就要写成htmlFor
+            */}
+            <div className="box title">我是div元素</div>
+            {/* 在三元表达式外面加一层()，既可以提高阅读性，也可以防止优先级问题 */}
+            {/* 在react里动态绑定class，只有下面这种写法，不像vue还可以“对象布尔值”动态绑定 */}
+            <div className={"box title " + (active ? "active" : "")}>我也是div元素</div>
+            <label htmlFor=""></label>
+
+            {/* 3.绑定style */}
+            {/* 外面那层{}表示可以在这里写js代码，里面那层{}表示一个对象 */}
+            {/* 在html或<style>css里写成font-size，在react内联样式里要写成小驼峰fontSize */}
+            <div style={{ color: "red", fontSize: "50px" }}>我是div,绑定style属性</div>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<App />, document.getElementById("app"));
+  </script>
+
+</body>
+
+</html>
