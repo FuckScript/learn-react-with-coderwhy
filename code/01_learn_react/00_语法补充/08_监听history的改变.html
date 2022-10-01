@@ -22,8 +22,17 @@
     const aEls = document.getElementsByTagName("a");
     for (let el of aEls) {
       el.addEventListener("click", e => {
+        /* 
+        点击a标签默认会发生url路径参数的改变+页面刷新
+        因为现在要自己手动实现路由了，所以这里用 e.preventDefault()禁止原本的默认行为
+        */
         e.preventDefault();
         const href = el.getAttribute("href");
+        /* 
+        pushState的第3个参数，
+          如果不以/开头，表示相对路径，会在原本的基础上添加路由参数，如 abc -> /root/abc
+          而如果以/开头，表示绝对路径，会直接替换之前的根路径，如 abc -> /abc
+        */
         history.pushState({}, "", href);
         urlChange();
       })
