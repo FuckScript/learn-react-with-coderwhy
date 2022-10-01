@@ -19,6 +19,9 @@ import {
 //   }
 // }
 
+/*
+箭头函数返回一个对象
+*/
 export const addAction = num => ({
   type: ADD_NUMBER,
   num
