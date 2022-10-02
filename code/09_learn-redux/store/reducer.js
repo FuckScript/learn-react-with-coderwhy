@@ -7,8 +7,9 @@ import {
 
 const defaultState = {
   counter: 0
-}
+};
 
+// action对象，里面的东西其实就是actionCreator.js箭头函数返回的东西
 function reducer(state = defaultState, action) {
   switch (action.type) {
     case ADD_NUMBER:
