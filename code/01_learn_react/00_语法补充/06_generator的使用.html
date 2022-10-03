@@ -61,6 +61,7 @@
     function* bar() {
       console.log("1111");
       const result = yield new Promise((resolve, reject) => {
+        // setTimeout模拟网络请求
         setTimeout(() => {
           resolve("Hello Generator");
         }, 3000);
